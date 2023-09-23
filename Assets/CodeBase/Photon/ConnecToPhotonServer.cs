@@ -13,7 +13,7 @@ namespace CodeBase.Photon
 
         public override void OnConnectedToMaster()
         {
-            SceneManager.LoadScene(ScenesNames.Lobby);
+            SceneManager.LoadScene(ScenesName.Lobby);
         }
     }
 }
