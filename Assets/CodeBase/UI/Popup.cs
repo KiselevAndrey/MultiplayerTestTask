@@ -1,28 +1,34 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace CodeBase.UI
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class Popup : MonoBehaviour
+    public abstract class Popup : MonoBehaviour
     {
-        [SerializeField] private Text _messageText;
         [SerializeField] private Button _closeButton;
 
         private CanvasGroup _canvasGroup;
 
-        public void Show(string message)
-        {
-            _messageText.text = message;
+        protected virtual void OnAwake() { }
 
-            ChangeVisibility(true);
+        protected void ChangeVisibility(bool visible)
+        {
+            _canvasGroup.alpha = visible ? 1f : 0f;
+            _canvasGroup.interactable = visible;
+            _canvasGroup.blocksRaycasts = visible;
+        }
+
+        protected void Close()
+        {
+            ChangeVisibility(false);
         }
 
         private void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
 
-            Close();
+            OnAwake();
         }
 
         private void OnEnable()
@@ -33,18 +39,6 @@ namespace CodeBase.UI
         private void OnDisable()
         {
             _closeButton.onClick.RemoveListener(Close);
-        }
-
-        private void Close()
-        {
-            ChangeVisibility(false);
-        }
-
-        private void ChangeVisibility(bool visible)
-        {
-            _canvasGroup.alpha = visible ? 1f : 0f;
-            _canvasGroup.interactable = visible;
-            _canvasGroup.blocksRaycasts = visible;
         }
     }
 }

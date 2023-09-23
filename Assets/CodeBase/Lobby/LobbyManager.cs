@@ -1,53 +1,72 @@
 using CodeBase.Scene;
 using CodeBase.UI;
+using CodeBase.Utility.Extension;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace CodeBase.Lobby
 {
     public class LobbyManager : MonoBehaviourPunCallbacks
     {
-        [Header("UI")]
-        [SerializeField] private InputField _roomNameInputField;
-        [SerializeField] private Button _createRoomButton;
-        [SerializeField] private Button _joinRoomButton;
-        [SerializeField] private Popup _errorPopup;
+        [SerializeField] private RoomAreaUI _roomArea;
+        [SerializeField] private NameAreaUI _nameArea;
+        [Space]
+        [SerializeField] private PopupWithMessage _errorPopup;
 
         public override void OnEnable()
         {
             base.OnEnable();
 
-            _createRoomButton.onClick.AddListener(CreateRoom);
-            _joinRoomButton.onClick.AddListener(JoinToRoom);
+            _roomArea.OnEnable();
+            _nameArea.OnEnable();
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
 
-            _createRoomButton.onClick.RemoveListener(CreateRoom);
-            _joinRoomButton.onClick.RemoveListener(JoinToRoom);
+            _roomArea.OnDisable();
+            _nameArea.OnDisable();
         }
 
-        public override void OnJoinedRoom()
-        {
+        public override void OnJoinedRoom() =>
             PhotonNetwork.LoadLevel(ScenesName.Game);
-        }
 
-        public override void OnJoinRoomFailed(short returnCode, string message)
-        {
+        public override void OnJoinRoomFailed(short returnCode, string message) =>
             _errorPopup.Show(message);
+
+        private void Awake()
+        {
+            _roomArea.Init(CreateRoom, JoinToRoom);
+            _nameArea.Awake();
         }
 
-        private void CreateRoom()
+        private void CreateRoom(string roomName)
         {
-            PhotonNetwork.CreateRoom(_roomNameInputField.text);
+            if (InputsHasContent(roomName))
+                PhotonNetwork.CreateRoom(roomName);
         }
 
-        private void JoinToRoom()
+        private void JoinToRoom(string roomName)
         {
-            PhotonNetwork.JoinRoom(_roomNameInputField.text);
+            if (InputsHasContent(roomName))
+                PhotonNetwork.JoinRoom(roomName);
+        }
+
+        private bool InputsHasContent(string roomName)
+        {
+            if(roomName.HasContent() == false)
+            {
+                _errorPopup.Show("Input field \"Room name\" is empty");
+                return false;
+            }
+            else if(_nameArea.IsNameSaved == false)
+            {
+                _errorPopup.Show("Input field \"Name\" is empty or not saved");
+                return false;
+            }
+
+            return true;
         }
     }
 }
