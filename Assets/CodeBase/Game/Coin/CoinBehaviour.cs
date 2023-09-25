@@ -13,14 +13,17 @@ namespace CodeBase.Game.Coin
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (_view.IsMine == false)
-                return;
-
             if(collision.TryGetComponent(out PlayerBehaviour player))
             {
                 player.PickupCoin();
-                PhotonNetwork.Destroy(gameObject);
+                Invoke(nameof(Destroy), 0.1f);
             }
+        }
+
+        private void Destroy()
+        {
+            if(_view.IsMine)
+                PhotonNetwork.Destroy(gameObject);
         }
     }
 }

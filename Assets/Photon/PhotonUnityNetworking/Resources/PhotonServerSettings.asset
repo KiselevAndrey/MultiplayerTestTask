@@ -34,18 +34,15 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - AddCreatedPlayerRPC
+  - ChangeHealthVisualRPC
+  - ChangeWalletVisualRPC
   - ClickRpc
   - DestroyRpc
-  - TakeDamageRPC
-  - ChangeCountActivePlayersRPC
-  - ChangeHealthValueRPC
-  - ChangeHealthVisualRPC
   - PlayerDieRPC
-  - AddMe
-  - AddMeRPC
-  - ChangeWalletVisualRPC
+  - SendWinnerRPC
   - SomeoneFilledWalletRPC
-  - AddCreatedPlayerRPC
+  - TakeDamageRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

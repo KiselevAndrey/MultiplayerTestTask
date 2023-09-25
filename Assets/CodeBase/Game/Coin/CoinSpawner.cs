@@ -12,7 +12,7 @@ namespace CodeBase.Game.Coin
         [SerializeField] private CoinBehaviour _coinPrefab;
         [SerializeField] private Transform _leftDownPoint;
         [SerializeField] private Transform _rightUpPoint;
-        [SerializeField, Range(0.1f, 2f)] private float _spawnWaitTime;
+        [SerializeField, Range(2f, 10f)] private float _spawnWaitTime = 5f;
 
         private bool _canSpawn;
         private WaitForSeconds _waitTime;
@@ -33,8 +33,8 @@ namespace CodeBase.Game.Coin
         {
             while (_canSpawn)
             {
-                yield return _waitTime;
                 Spawn();
+                yield return _waitTime;
             }
         }
 

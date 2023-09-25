@@ -23,6 +23,9 @@ namespace CodeBase.Game.Gameplay
         public void SomeoneFilledWallet() => 
             _view.RPC(nameof(SomeoneFilledWalletRPC), RpcTarget.All);
 
+        public void SendWinner(string name, int coinsCount) =>
+            _view.RPC(nameof(SendWinnerRPC), RpcTarget.All, name, coinsCount);
+
 
         [PunRPC]
         private void PlayerDieRPC(int playerId) => 
@@ -32,9 +35,12 @@ namespace CodeBase.Game.Gameplay
         private void AddCreatedPlayerRPC(int playerID) => 
             _controller.SurviveController.AddMe(playerID);
 
-
         [PunRPC]
         private void SomeoneFilledWalletRPC() =>
             _controller.CoinsWinController.SomeoneFilledWallet();
+
+        [PunRPC]
+        private void SendWinnerRPC(string name, int coinsCount) =>
+            _controller.ShowFinalizePopup(name, coinsCount);
     }
 }

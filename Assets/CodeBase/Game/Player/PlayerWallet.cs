@@ -12,27 +12,23 @@ namespace CodeBase.Game.Player
 
         private PlayerRpcController _rpcController;
 
-        private int _coinsCount;
-
         public event Action WalletIsFull;
 
-        public void Init(PlayerRpcController rpcController)
-        {
+        public int CoinsCount { get; private set; }
+
+        public void Init(PlayerRpcController rpcController) => 
             _rpcController = rpcController;
-        }
 
         public void PickupCoin()
         {
-            _coinsCount++;
-            _rpcController.ChangeWalletVisual((byte)((_coinsCount * 100) / _maxCoinsCount));
+            CoinsCount++;
+            _rpcController.ChangeWalletVisual((byte)((CoinsCount * 100) / _maxCoinsCount));
 
-            if(_coinsCount>= _maxCoinsCount) 
+            if(CoinsCount >= _maxCoinsCount) 
                 WalletIsFull?.Invoke();
         }
 
-        public void ChangeVisual(byte fullnessPercent)
-        {
+        public void ChangeVisual(byte fullnessPercent) => 
             _coinBar.SetValue(fullnessPercent * 0.01f);
-        }
     }
 }

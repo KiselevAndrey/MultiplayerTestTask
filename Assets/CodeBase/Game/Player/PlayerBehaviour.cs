@@ -28,8 +28,11 @@ namespace CodeBase.Game.Player
             Attacker.ActiveGame(isActiveGame);
         }
 
-        public void PickupCoin() => 
-            Wallet.PickupCoin();
+        public void PickupCoin()
+        {
+            if (View.IsMine)
+                Wallet.PickupCoin();
+        }
 
         private void Awake()
         {
@@ -39,6 +42,9 @@ namespace CodeBase.Game.Player
             Stats.Init(_rpcController);
             Wallet.Init(_rpcController);
             Attacker.Init(View, this);
+
+            if (View.IsMine)
+                GetComponentInChildren<PlayerModel>().ChangeColor(Color.cyan);
         }
 
         private void OnDisable() => 

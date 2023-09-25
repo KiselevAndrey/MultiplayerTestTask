@@ -1,5 +1,6 @@
 using CodeBase.Game.Player;
 using CodeBase.Scene;
+using CodeBase.Settings;
 using CodeBase.UI;
 using Photon.Pun;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace CodeBase.Game.Gameplay
         private GameRpcController _rpcController;
 
         private bool _gameStarted;
+        private bool _localIsWin;
 
         public override void OnEnable()
         {
@@ -41,6 +43,26 @@ namespace CodeBase.Game.Gameplay
         public override void OnPlayerLeftRoom(global::Photon.Realtime.Player otherPlayer) => 
             SurviveController.OnPlayerLeftRoom(otherPlayer);
 
+        public override void OnMasterClientSwitched(global::Photon.Realtime.Player newMasterClient)
+        {
+            if(newMasterClient.IsLocal)
+                CoinsWinController.ActiveSpawn(true);
+        }
+
+        public void ShowFinalizePopup(string winerName, int coinsCount)
+        {
+            string message;
+            if (_localIsWin)
+                message = "You win!\n" +
+                    $"Your coins: {coinsCount}";
+            else
+                message = "You lose!\n" +
+                    $"Winner: {winerName} with {coinsCount} coins.\n" +
+                    $"Your coins: {SurviveController.Player.Wallet.CoinsCount}";
+
+            _finalizePopup.Show(message);
+        }
+
         private void Awake()
         {
             var view = GetComponent<PhotonView>();
@@ -55,23 +77,17 @@ namespace CodeBase.Game.Gameplay
             if (isActiveGame)
             {
                 _gameStarted = true;
-                CoinsWinController.ActiveSpawn(true);
+                if(PhotonNetwork.IsMasterClient)
+                    CoinsWinController.ActiveSpawn(true);
             }
             else if (_gameStarted)
             {
-                ShowFinalMessage(localIsWin);
+                _localIsWin = localIsWin;
                 CoinsWinController.ActiveSpawn(false);
                 SurviveController.DisablePlayer();
+                if (_localIsWin)
+                    _rpcController.SendWinner(PlayerPrefsManager.GetName(), SurviveController.Player.Wallet.CoinsCount);
             }
-        }
-
-        private void ShowFinalMessage(bool youWin)
-        {
-            var message = youWin ?
-                "You win!" :
-                "You lose!";
-
-            _finalizePopup.Show(message);
         }
 
         private void OnPlayerCreated(PlayerBehaviour player) => 

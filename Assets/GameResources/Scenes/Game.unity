@@ -907,7 +907,7 @@ MonoBehaviour:
   _coinPrefab: {fileID: 1415324592881188500, guid: 1f7b0a7fa1dbf2d429876c4ef723f606, type: 3}
   _leftDownPoint: {fileID: 26550461}
   _rightUpPoint: {fileID: 408869766}
-  _spawnWaitTime: 1
+  _spawnWaitTime: 6
 --- !u!1 &1573756879
 GameObject:
   m_ObjectHideFlags: 0

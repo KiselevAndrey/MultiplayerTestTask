@@ -10,7 +10,6 @@ namespace CodeBase.Game.Gameplay
     {
         [SerializeField] private PlayerSpawner _playerSpawner;
 
-        private PlayerBehaviour _player;
         private readonly List<int> _activePlayersIDs = new();
 
         private GameRpcController _rpcController;
@@ -19,7 +18,9 @@ namespace CodeBase.Game.Gameplay
 
         private bool _localIsLive;
 
-        private int PlayerId => _player.View.CreatorActorNr;
+        private int PlayerId => Player.View.CreatorActorNr;
+
+        public PlayerBehaviour Player { get; private set; }
 
         public void Init(GameRpcController rpcController, Action<bool, bool> onActivePlayersCountChanged, Action<PlayerBehaviour> onPlayerCreated)
         {
@@ -50,8 +51,8 @@ namespace CodeBase.Game.Gameplay
 
         public void DisablePlayer()
         {
-            if (_player != null)
-                _player.ActiveGame(false);
+            if (Player != null)
+                Player.ActiveGame(false);
         }
 
         public void PlayerDie(int CreatorActorNr)
@@ -68,18 +69,18 @@ namespace CodeBase.Game.Gameplay
 
         private void OnPlayerCreated(GameObject player)
         {
-            _player = player.GetComponent<PlayerBehaviour>();
-            _player.Stats.OnDie += OnPlayerDie;
+            Player = player.GetComponent<PlayerBehaviour>();
+            Player.Stats.OnDie += OnPlayerDie;
             _localIsLive = true;
-            _activePlayersIDs.Add(_player.View.CreatorActorNr);
-            OnPlayerCreatedAction(_player);
+            _activePlayersIDs.Add(Player.View.CreatorActorNr);
+            OnPlayerCreatedAction(Player);
 
             OnActivePlayersCountChanged();
         }
 
         private void OnPlayerDie()
         {
-            _player.Stats.OnDie -= OnPlayerDie;
+            Player.Stats.OnDie -= OnPlayerDie;
             _localIsLive = false;
             _rpcController.PlayerDie(PlayerId);
         }
@@ -89,7 +90,7 @@ namespace CodeBase.Game.Gameplay
             var isActiveGame = _activePlayersIDs.Count > 1;
             //isActiveGame = true;
 
-            _player.ActiveGame(isActiveGame);
+            Player.ActiveGame(isActiveGame);
 
             OnActivePlayersCountChangedAction(isActiveGame, _localIsLive);
         }
