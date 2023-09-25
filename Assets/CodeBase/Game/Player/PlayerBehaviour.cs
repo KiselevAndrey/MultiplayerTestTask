@@ -9,6 +9,7 @@ namespace CodeBase.Game.Player
     {
         [field: SerializeField] public PlayerStats Stats { get; private set; }
         [field: SerializeField] public PlayerAttacker Attacker { get; private set; }
+        [field: SerializeField] public PlayerWallet Wallet { get; private set; }
 
         public PhotonView View { get; private set; }
 
@@ -27,12 +28,16 @@ namespace CodeBase.Game.Player
             Attacker.ActiveGame(isActiveGame);
         }
 
+        public void PickupCoin() => 
+            Wallet.PickupCoin();
+
         private void Awake()
         {
             View = GetComponent<PhotonView>();
             _rpcController = GetComponent<PlayerRpcController>();
             _rpcController.Init(this);
             Stats.Init(_rpcController);
+            Wallet.Init(_rpcController);
             Attacker.Init(View, this);
         }
 

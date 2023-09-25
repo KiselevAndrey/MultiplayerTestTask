@@ -37,6 +37,7 @@ Transform:
   m_Children:
   - {fileID: 1988820687427044112}
   - {fileID: 8113883197819294603}
+  - {fileID: 7201201752631775205}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,6 +103,9 @@ MonoBehaviour:
     _projectilePrefab: {fileID: 1388880095901659276, guid: 01e68e5d68b73ff4ba6b6e7881592866, type: 3}
     _projectileSpawnPoint: {fileID: 5014631749877789474}
     _reloadTime: 1
+  <Wallet>k__BackingField:
+    _maxCoinsCount: 10
+    _coinBar: {fileID: 5632266185719248123}
 --- !u!114 &4874866767343589102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +313,103 @@ Transform:
   m_Father: {fileID: 1988820687427044112}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &974251275075294823
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1988820686472548789}
+    m_Modifications:
+    - target: {fileID: 3746239673715707791, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461772271972154083, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_Color.g
+      value: 0.90196085
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593727649417326328, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593727649417326328, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593727649417326328, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_Color.g
+      value: 0.901886
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593727649417326328, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9128437318030720009, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_Name
+      value: Wallet Bar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+--- !u!114 &5632266185719248123 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4876527712969745052, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+  m_PrefabInstance: {fileID: 974251275075294823}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee1d1d61ad509948b1b1df28a96f37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &7201201752631775205 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7956438358997866882, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+  m_PrefabInstance: {fileID: 974251275075294823}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2229492162282359305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -361,16 +462,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8593727649417326328, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593727649417326328, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
       propertyPath: m_Color.b
-      value: 0.11690104
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8593727649417326328, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
       propertyPath: m_Color.g
-      value: 0.11690104
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8593727649417326328, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
       propertyPath: m_Color.r
-      value: 0.3490566
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9128437318030720009, guid: e2ae43e56ebaf584ca582e0f127e985a, type: 3}
       propertyPath: m_Name

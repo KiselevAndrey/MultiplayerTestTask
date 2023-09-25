@@ -14,14 +14,11 @@ namespace CodeBase.Game.Player
         private Action Die;
         private PlayerRpcController _rpcController;
 
-        public bool IsLive => _health > 0;
-
         public void Init(Action die, PlayerRpcController rpcController) 
         {
             Die = die;
             _rpcController = rpcController;
             _health = _maxHealth;
-            //_rpcController.ChangeHealthVisual(100);     // 100% of full health
         }
 
         public void TakeDamage(int damage)
@@ -33,7 +30,7 @@ namespace CodeBase.Game.Player
             }
 
             _health -= damage;
-            _rpcController.ChangeHealthVisual((_health * 100) / _maxHealth);
+            _rpcController.ChangeHealthVisual((byte)((_health * 100) / _maxHealth));
         }
 
         public void ChangeHealthVisual(int newHealthPercent) => 

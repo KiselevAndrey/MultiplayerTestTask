@@ -521,6 +521,7 @@ GameObject:
   - component: {fileID: 864108794}
   - component: {fileID: 864108795}
   - component: {fileID: 864108796}
+  - component: {fileID: 864108797}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -555,7 +556,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58677958219ddb24ab74dab3d2261196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 1442447597}
+  <SurviveController>k__BackingField:
+    _playerSpawner: {fileID: 1442447597}
+  <CoinsWinController>k__BackingField:
+    _coinSpawner: {fileID: 1442447598}
   _finalizePopup: {fileID: 2103420029}
 --- !u!114 &864108796
 MonoBehaviour:
@@ -579,6 +583,18 @@ MonoBehaviour:
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &864108797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864108793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d28e607315d0a4280f9a49aff6692c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &968432841
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1442447596}
   - component: {fileID: 1442447597}
+  - component: {fileID: 1442447598}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -875,6 +892,22 @@ MonoBehaviour:
   _leftDownPoint: {fileID: 26550461}
   _rightUpPoint: {fileID: 408869766}
   _joystick: {fileID: 1445643503766659780}
+--- !u!114 &1442447598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442447595}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef1b31f0d45d8bc4fae72edb0df1ebe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinPrefab: {fileID: 1415324592881188500, guid: 1f7b0a7fa1dbf2d429876c4ef723f606, type: 3}
+  _leftDownPoint: {fileID: 26550461}
+  _rightUpPoint: {fileID: 408869766}
+  _spawnWaitTime: 1
 --- !u!1 &1573756879
 GameObject:
   m_ObjectHideFlags: 0
