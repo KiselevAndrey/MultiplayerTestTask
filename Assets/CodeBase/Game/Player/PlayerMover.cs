@@ -7,21 +7,29 @@ namespace CodeBase.Game.Player
     {
         private FloatingJoystick _joystick;
         private Rigidbody2D _rigidbody;
+        private PlayerModel _model;
         private IMoveStats _moveStats;
 
-        public void Init(FloatingJoystick joystick)
+        public void Init(FloatingJoystick joystick, Quaternion spawnRotation)
         {
-            Debug.Log("Init");
             _joystick = joystick;
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _moveStats = GetComponent<IMoveStats>();
+            _moveStats = GetComponent<PlayerBehaviour>().Stats;
+            _model = GetComponentInChildren<PlayerModel>();
+            _model.transform.localRotation = spawnRotation;
+
+            InitRigidBody();
         }
 
         private void Start()
         {
-            Debug.Log("Start");
             if (_joystick == null)
                 Destroy(this);
+        }
+
+        private void InitRigidBody()
+        {
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _rigidbody.simulated = true;
         }
 
         private void FixedUpdate()
@@ -31,7 +39,7 @@ namespace CodeBase.Game.Player
             if(_joystick.Direction != Vector2.zero)
             {
                 var toRotation = Quaternion.LookRotation(Vector3.forward, _joystick.Direction);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, _moveStats.RotationSpeed * Time.deltaTime);
+                _model.transform.rotation = Quaternion.RotateTowards(_model.transform.rotation, toRotation, _moveStats.RotationSpeed * Time.deltaTime);
             }
         }
     }

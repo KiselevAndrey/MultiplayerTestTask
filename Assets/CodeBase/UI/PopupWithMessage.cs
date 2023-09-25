@@ -7,17 +7,11 @@ namespace CodeBase.UI
     {
         [SerializeField] private Text _messageText;
 
-
         public void Show(string message)
         {
             _messageText.text = message;
 
             ChangeVisibility(true);
-        }
-
-        protected override void OnAwake()
-        {
-            Close();
         }
     }
 }

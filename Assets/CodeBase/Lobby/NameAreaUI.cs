@@ -13,24 +13,16 @@ namespace CodeBase.Lobby
 
         public bool IsNameSaved => PlayerPrefsManager.GetName().HasContent();
 
-        public void Awake()
-        {
+        public void Awake() => 
             _nameInputField.text = PlayerPrefsManager.GetName();
-        }
 
-        public void OnEnable()
-        {
+        public void OnEnable() => 
             _changeNameButton.onClick.AddListener(ChangeName);
-        }
 
-        public void OnDisable()
-        {
+        public void OnDisable() => 
             _changeNameButton.onClick.RemoveListener(ChangeName);
-        }
 
-        private void ChangeName()
-        {
+        private void ChangeName() => 
             PlayerPrefsManager.SetName(_nameInputField.text);
-        }
     }
 }

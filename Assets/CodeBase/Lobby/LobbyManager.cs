@@ -32,6 +32,9 @@ namespace CodeBase.Lobby
         public override void OnJoinedRoom() =>
             PhotonNetwork.LoadLevel(ScenesName.Game);
 
+        public override void OnCreateRoomFailed(short returnCode, string message) =>
+            _errorPopup.Show(message);
+
         public override void OnJoinRoomFailed(short returnCode, string message) =>
             _errorPopup.Show(message);
 
