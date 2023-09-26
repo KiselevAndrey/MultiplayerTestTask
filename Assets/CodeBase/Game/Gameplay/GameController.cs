@@ -4,6 +4,7 @@ using CodeBase.Settings;
 using CodeBase.UI;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeBase.Game.Gameplay
 {
@@ -15,6 +16,8 @@ namespace CodeBase.Game.Gameplay
 
         [Header("UI")]
         [SerializeField] private PopupWithMessage _finalizePopup;
+        [SerializeField] private Text _waitText;
+        [SerializeField] private Button _logoutButton;
 
         private GameRpcController _rpcController;
 
@@ -26,7 +29,8 @@ namespace CodeBase.Game.Gameplay
             base.OnEnable();
 
             SurviveController.OnEnable();
-            _finalizePopup.OnClose += OnCloseFinalizePopup;
+            _finalizePopup.OnClose += LeaveRoom;
+            _logoutButton.onClick.AddListener(LeaveRoom);
         }
 
         public override void OnDisable()
@@ -34,7 +38,8 @@ namespace CodeBase.Game.Gameplay
             base.OnDisable();
 
             SurviveController.OnDisable();
-            _finalizePopup.OnClose -= OnCloseFinalizePopup;
+            _finalizePopup.OnClose -= LeaveRoom;
+            _logoutButton.onClick.RemoveListener(LeaveRoom);
         }
 
         public override void OnPlayerEnteredRoom(global::Photon.Realtime.Player newPlayer) => 
@@ -77,6 +82,7 @@ namespace CodeBase.Game.Gameplay
             if (isActiveGame)
             {
                 _gameStarted = true;
+                _waitText.gameObject.SetActive(false);
                 if(PhotonNetwork.IsMasterClient)
                     CoinsWinController.ActiveSpawn(true);
             }
@@ -93,7 +99,7 @@ namespace CodeBase.Game.Gameplay
         private void OnPlayerCreated(PlayerBehaviour player) => 
             CoinsWinController.OnPlayerCreated(player);
 
-        private void OnCloseFinalizePopup()
+        private void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
             PhotonNetwork.LoadLevel(ScenesName.Lobby);
